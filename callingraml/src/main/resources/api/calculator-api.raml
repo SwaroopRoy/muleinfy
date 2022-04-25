@@ -1,0 +1,128 @@
+#%RAML 1.0
+title: Calculator-API
+version: v1
+protocols:
+  - HTTP
+  - HTTPS
+description: "this api is used for math ops"  
+traits:
+  query: !include TRAITS/Reuse.raml
+  
+
+/addition:
+  get:
+    is:
+      - query
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Add-Respo.json
+              
+      
+
+/subtraction:
+  put:
+    is:
+      - query
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Sub-Respo.json
+                 
+      400:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "bad request"
+              }        
+      401:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Unauthorized"
+              }  
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Internal error"
+              }  
+
+/Multiplication:
+  post:
+    is:
+      - query
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Multi-Respo.json
+                 
+      400:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Bad request"
+              }        
+      401:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Unauthorized"
+              }        
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Internal error"
+              }    
+/Division:
+  delete:
+    is:
+      - query
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Divi-Respo.json
+             
+      400:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Bad request"
+              }
+      401:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Unauthorized"
+              }        
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "Message" : "Internal Error"
+              }
+
+
+
+
+
+                             
+
+
+                        
+     
+            
