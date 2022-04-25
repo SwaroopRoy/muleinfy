@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a6b812e6-f58f-43a9-ae9c-c3b4f754c34c" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<flow name="myfirstFlow" doc:id="67f1a6aa-4fd0-4879-bea6-3d2bd08076e5" >
+		<http:listener doc:name="Listener" doc:id="4a88e304-0192-4c57-9682-afeec88ea267" config-ref="HTTP_Listener_config" path="/myfirst" allowedMethods="GET,POST">
+			<http:response >
+				<http:body ><![CDATA[Hey my name is peter i started learing Mulesoft]]></http:body>
+			</http:response>
+		</http:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="758e7c2c-92c4-419f-b134-b5edd3319ed9" message="Hey my name is peter i started learing Mulesoft"/>
+	</flow>
+</mule>
