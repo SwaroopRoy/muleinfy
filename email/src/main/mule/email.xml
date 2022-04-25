@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a64fa74c-1724-42df-a221-99be6c07e35e" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="bba48973-4145-4a7f-bff6-39700b2d19ff" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="swaroop.mulesoft12@gmail.com" password="ADPadp8$1" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<flow name="emailFlow" doc:id="96ef8d03-34b1-47ec-bab0-edd680d66503" >
+		<http:listener doc:name="Listener" doc:id="b0b9a860-4e91-47b1-9914-801353344929" config-ref="HTTP_Listener_config" path="gmail"/>
+		<email:send doc:name="Send" doc:id="6cfb0bc1-4c7b-4aa9-9925-b885f78814c1" config-ref="Email_SMTP" fromAddress="swaroop.mulesoft12@gmail.com" subject="hi all how are you">
+			<email:to-addresses >
+				<email:to-address value="swaroop5010@gmail.com" />
+				<email:to-address value="swaroopg1221@gmail.com" />
+				<email:to-address value="togvikas@gmail.com" />
+			</email:to-addresses>
+			<email:cc-addresses >
+				<email:cc-address value="swaroop453@gmail.com" />
+			</email:cc-addresses>
+		</email:send>
+		<logger level="INFO" doc:name="Logger" doc:id="018fcb1d-d93a-4d67-a05e-b46cda3fec98" message="#[payload]"/>
+	</flow>
+</mule>
